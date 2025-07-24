@@ -49,14 +49,15 @@ export default function Page() {
             window.location.href = "/auth/login"
         }
 
-        window.location.href = "/dashboard"
 
         const data = await response.json()
 
         localStorage.setItem('token',data.session.access_token);
         localStorage.setItem('id',data.user.id)
         localStorage.setItem("email",data.user.email)
-    }
+    
+        window.location.href = "/dashboard"
+}
 
     return (
      <div className=' flex flex-col  items-center justify-center h-full w-full md:w-screen md:h-screen'>

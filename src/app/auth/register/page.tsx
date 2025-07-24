@@ -14,7 +14,8 @@ const initialState = {
     password : '',
     password_confirmation : '',
     date : '',
-    role:''
+    role:'',
+    department:""
 }
 
 type State = {
@@ -28,6 +29,7 @@ type State = {
     password_confirmation : string
     date : string
     role : string
+    department:string
 }
 
 type ActionType ={
@@ -57,7 +59,9 @@ const reducer = (state : State,action : ActionType)=>{
             return {...state, gender: action.payload}
         case 'role':
          return {...state, role: action.payload}
-        default:
+        case 'department':
+         return {...state, department:action.payload}
+         default:
             return state
         }
 }
@@ -86,7 +90,8 @@ const submitForm = async()=>{
             username: state.username,
             address: state.address,
             role: state.role,
-            birth_date: state.date
+            birth_date: state.date,
+            departement:state.department
         })
     })
     const data = await response.json()
@@ -94,7 +99,7 @@ const submitForm = async()=>{
     if(!response.ok){
         console.log('failed send data',data)
     }
-    window.location.href = "/login"
+    window.location.href = "/auth/login"
     }catch(error){
         console.log(error)
     }
@@ -170,7 +175,8 @@ return (
             icon={view ? "eye-on.svg":"eye-off.svg"} 
             valued={state.password} 
             changeController={(e)=>dispatch({type:"password",payload:e.target.value})} action={()=>setView(!view)}/>
-            
+
+
             <Input 
             dbName="" 
             props={"Confirm Password"} 
@@ -180,16 +186,36 @@ return (
             changeController={(e)=>dispatch({type:"password_confirmation",payload:e.target.value})}
             action={()=>{setConfirmView(!confirmView)}}/>
 
+
+            <Selection valued={state.department} changed={(e) => dispatch({ type: "department", payload: e.target.value })} name="department" id="department" textfor="Departement">
+              <option value="" disabled></option>
+                {
+                    [
+                        "Pengurus Inti",
+                        'Departement PO',
+                        'Departement Medkom',
+                        'Departement Miba',
+                        'Departement Litbang',
+                        'Departement Humas',
+                    ].map((item,index)=>{
+                        return(
+                            <option value={item} key={index++}>{item}</option>
+                        )
+                    })
+                }
+            </Selection>
+
             <Selection valued={state.role} changed={(e)=>dispatch({type:"role",payload:e.target.value})} name="role" id="role" textfor="Role">
                    <option value="" disabled></option>
                 {
                     [   'Ketua Umum',
+                        'Wakil Ketua Umum',
                         'Sekertaris Umum',
                         'Bendahara Umum',
-                        'Ketua Departemen Litbang',
-                        'Wakil Ketua Departemen Litbang',
-                        'Sekertaris Departemen Litbang',
-                        'Bendahara Departemen Litbang',
+                        'Ketua Departement',
+                        'Wakil Ketua Departement',
+                        'Sekertaris Departement',
+                        'Bendahara Departement',
                         'Anggota Departement'
                     ].map((item,index)=>{
                         return(
@@ -210,8 +236,8 @@ return (
 
 
             <div className='flex flex-col gap-1 justify-center'>
-                <Button type="button" action={()=>submitForm()} variant={"bg-cyan-700 shadow hover:cursor-pointer hover:shadow-2xl transition-shadow p-3 rounded"} text={"Register"} media={""}/>
-                 <Button type="button" action={()=>console.log("On Proggress") } variant={"bg-white text-black p-3 rounded flex items-center shadow hover:shadow-2xl transition-shadow hover:cursor-pointer justify-center gap-1"} text={"Register with Google"} media={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVITryCqReDwcczrsclm38R8gZt_e92OWj3i8C06WcFWtaM_rIcuh-ekY1umkZf_hlWSc&usqp=CAU"}/>   
+                <Button type="button" action={() => submitForm()} variant={"bg-cyan-700 shadow hover:cursor-pointer hover:shadow-2xl transition-shadow p-3 rounded"} text={"Register"} media={""} disabled={false}/>
+                 <Button type="button" action={() => console.log("On Proggress")} variant={"bg-white text-black p-3 rounded flex items-center shadow hover:shadow-2xl transition-shadow hover:cursor-pointer justify-center gap-1"} text={"Register with Google"} media={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVITryCqReDwcczrsclm38R8gZt_e92OWj3i8C06WcFWtaM_rIcuh-ekY1umkZf_hlWSc&usqp=CAU"} disabled={false}/>   
                 <a href="/auth/login" className='text-cyan-600 text-center hover:text-red-800 transition-colors hover:cursor-pointer hover:underline mt-3'>Already have an acount?</a>
             </div>
 
