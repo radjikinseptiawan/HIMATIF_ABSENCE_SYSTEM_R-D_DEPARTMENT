@@ -1,8 +1,34 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function MenuNavigation() {
   const [open, setOpen] = useState(false)
+  const [profile,setProfile] = useState<{role:string} | null>(null)
+  
+  
+  useEffect(() => {
+    const getUserProfile = async () => {
+      const token = localStorage.getItem('token')
+      if(!token){
+        window.location.href = "/auth/login"
+      }
+    
+      const id = localStorage.getItem('id')
+      const response = await fetch(`http://localhost:3001/dashboard/${id}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      
+      const data = await response.json()
+      setProfile(data.data)
+    }
+
+    getUserProfile()
+  }, [])
+
+  console.log(profile)
 
   const photos = () => {
     window.location.href = "/photos"
@@ -51,6 +77,33 @@ export default function MenuNavigation() {
                 <a href={item.href} className='flex items-center gap-2'><img src={item.icon} alt={item.title} />{item.title}</a>
               </li>
             ))}
+            {
+              (profile?.role == "Ketua Departement" || 
+              profile?.role == "Ketua Umum" || 
+              profile?.role == "Sekertaris Umum" || 
+              profile?.role == "Bendahara Umum") &&
+              <div className='p-3 border-t-2 border-cyan-400 '>
+             {
+              [
+                {title: "Manajemen Anggota",href:"/list-anggota",onclicked:()=>{},icon:"/users.svg"},
+                {title: "Buat Program Kerja", href:"/dashboard",onClicked:()=>{},icon:"/file-plus.svg"},
+                {title: "Upload Notulensi",href:"/",onclicked:()=>{},icon:"/folder.svg"},
+                {title: "Buat Rapat", href:"/",onclick:()=>{},icon:"/message-circle.svg"}
+              ].map((item,index)=>{
+                return(
+              <li 
+                  key={index++}
+                onClick={()=>{}}
+                className="text-cyan-400 text-base md:text-md p-2 rounded hover:bg-sky-100 hover:cursor-pointer hover:shadow"
+              >
+                <a href={"/"} className='flex items-center gap-2'><img src={item.icon} alt={item.icon} />{item.title}</a>
+              </li> 
+               )                
+              })
+
+             }
+              </div>
+          }
           </ul>
         </div>
       )}

@@ -14,6 +14,10 @@ export default function MenuSection() {
           <img src="file-text.svg" alt="" />
           Notulensi
         </li>
+        <li className="hover:text-cyan-800 cursor-pointer flex items-center flex-col">
+          <img src="bell.svg" alt="" />
+          Notifikasi
+        </li>
       </ul>
     </div>
   )

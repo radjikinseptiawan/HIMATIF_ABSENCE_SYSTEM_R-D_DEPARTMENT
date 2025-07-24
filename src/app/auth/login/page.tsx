@@ -1,7 +1,7 @@
 'use client'
 import Button from '@/component/button';
 import Input from '@/component/input_login_register';
-import React, { useReducer, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import '../locals.css';
 
 const initialState = {
@@ -31,6 +31,13 @@ export default function Page() {
     const [state,dispatch] = useReducer(reducer,initialState)
     const [view,setView] = useState<boolean>(false)
     
+
+    useEffect(()=>{
+        if(localStorage.getItem("token") && localStorage.getItem("email") && localStorage.getItem("id")){
+            window.location.href = "/dashboard"
+        }
+    },[])
+
     const trySignIn = async (e : React.FormEvent)=>{
         e.preventDefault()
         const response = await fetch('http://localhost:3001/login',{

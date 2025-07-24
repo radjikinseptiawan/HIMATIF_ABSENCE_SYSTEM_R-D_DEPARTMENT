@@ -56,9 +56,9 @@ export default function AbsenceSection() {
       const absenAt = localStorage.getItem('absenAt')
       if(absenAt){
         const diffMs = new Date().getTime() - new Date(absenAt).getTime();
-        const diffhours = diffMs/(1000 * 60)
+        const diffhours = diffMs/(1000 * 60 * 60)
 
-        if(diffhours >= 5){
+        if(diffhours >= 24){
         
         const resetData = async ()=>{
           const response = await fetch(`http://localhost:3001/absence/${id}`,{
