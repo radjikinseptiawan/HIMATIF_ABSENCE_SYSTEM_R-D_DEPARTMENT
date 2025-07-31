@@ -1,7 +1,7 @@
 import React, { ChangeEvent, ReactNode, useRef } from 'react'
 
 export default function Selection({name,changed,id,valued,children,textfor}:{changed:(e : ChangeEvent<HTMLSelectElement>)=>void,valued:string,textfor:string,name:string,id:string,children:ReactNode}) {
-  const refId = useRef(null)
+  const refId = useRef<HTMLInputElement | null>(null)
   
   const focusRef = ()=>{
     if(refId.current){

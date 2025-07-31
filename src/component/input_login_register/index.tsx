@@ -13,7 +13,7 @@ type DataProps = {
 }
 
 export default function Input({ props, valued,type,icon ,action,dbName,changeController }: DataProps) {
-  const refId = useRef<HTMLInputElement>(null)
+  const refId = useRef<HTMLInputElement | null>(null)
   
   const focused = ()=>{
     if(refId.current){
@@ -22,7 +22,9 @@ export default function Input({ props, valued,type,icon ,action,dbName,changeCon
   }
 
     return (
-            <div onClick={focused} className='border flex flex-col p-2 rounded  border-gray-400'>
+            <div onClick={()=>{
+              focused()
+              }} className='border flex flex-col p-2 rounded  border-gray-400'>
                 <label htmlFor={props} className='text-gray-600 hover:cursor-pointer'>{props}</label>
                 <div className='flex gap-1'>
                 <input ref={refId} value={valued} type={type} className='text-black border-b w-full border-gray-400' onChange={changeController} name={dbName} id={props} />
