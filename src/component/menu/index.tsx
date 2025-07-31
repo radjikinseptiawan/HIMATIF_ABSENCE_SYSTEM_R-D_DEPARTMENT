@@ -66,7 +66,7 @@ export default function MenuNavigation() {
               { title: "Home", href: "/dashboard", onClicked: toHome, icon : "/home.svg" },
               { title: "Profile", href: "/profile", onClicked: toProfile, icon:"/user.svg" },
               { title: "Photos", href: "/photos", onClicked: photos, icon:"/camera.svg" },
-              {title: "Program Kerja",href:"/program",onClicked: ()=>{console.log('progress')},icon:"/briefcase.svg"},
+              { title: "Program Kerja",href:"/program_kerja",onClicked: ()=>{console.log('progress')},icon:"/briefcase.svg"},
               { title: "Logout", href: "/auth/login", onClicked: logoutUser,icon:"/log-out.svg"},
             ].map((item, index) => (
               <li 
@@ -86,9 +86,9 @@ export default function MenuNavigation() {
              {
               [
                 {title: "Manajemen Anggota",href:"/list-anggota",onclicked:()=>{},icon:"/users.svg"},
-                {title: "Buat Program Kerja", href:"/dashboard",onClicked:()=>{},icon:"/file-plus.svg"},
-                {title: "Upload Notulensi",href:"/",onclicked:()=>{},icon:"/folder.svg"},
-                {title: "Buat Rapat", href:"/",onclick:()=>{},icon:"/message-circle.svg"}
+                {title: "Buat Program Kerja", href:"/create-proker",onClicked:()=>{},icon:"/file-plus.svg"},
+                {title: "Upload Pengumuman",href:"/upload-pengumuman",onclicked:()=>{},icon:"/folder.svg"},
+                {title: "Buat Rapat", href:"/create-rapat",onclick:()=>{},icon:"/message-circle.svg"}
               ].map((item,index)=>{
                 return(
               <li 
@@ -96,7 +96,7 @@ export default function MenuNavigation() {
                 onClick={()=>{}}
                 className="text-cyan-400 text-base md:text-md p-2 rounded hover:bg-sky-100 hover:cursor-pointer hover:shadow"
               >
-                <a href={"/"} className='flex items-center gap-2'><img src={item.icon} alt={item.icon} />{item.title}</a>
+                <a href={item.href} className='flex items-center gap-2'><img src={item.icon} alt={item.icon} />{item.title}</a>
               </li> 
                )                
               })

@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from 'react'
 import './locals.css'
 import MenuNavigation from '@/component/menu'
+import ProfileSkeleton from '@/component/profile/loading'
 
 type DataProfile = {
   username: string;
@@ -43,6 +44,12 @@ export default function Page() {
 
     getUserProfile()
   }, [])
+
+  if(profile === null){
+    return(
+      <ProfileSkeleton/>
+    )
+  }
 
   return (
     <>
@@ -118,7 +125,7 @@ export default function Page() {
         )}
   
         <div className='flex justify-end'>
-          <button className='bg-yellow-400 p-3 w-52 shadow-2xl rounded-md'>Edit</button>
+          <button className='bg-yellow-400 p-3 w-52 shadow-2xl rounded-md' onClick={()=>window.location.href = "/profile/edit"}>Edit</button>
         </div>
       </div>
     </div>
