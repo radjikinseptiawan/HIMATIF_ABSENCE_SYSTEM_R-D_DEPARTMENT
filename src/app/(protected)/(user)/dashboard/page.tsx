@@ -18,6 +18,7 @@ export default function page() {
   const [width, setWidth] = useState<number>(0)
   const [open, setOpen] = useState<boolean>(false)
   const [data, setData] = useState<RoleData | null>(null)
+  const [imageUrl,setImageUrl] = useState<string | null>(null)
   useEffect(()=>{
     const responsiveUi = () => setWidth(window.innerWidth)
     responsiveUi()
@@ -43,6 +44,17 @@ export default function page() {
       console.log(response.status)
       throw new Error("Failed connecting to server")
     }
+          const photoResponse = await fetch(`http://localhost:3001/users-accounts/${id}/photo`,{
+        headers : {
+          Authorization : `Bearer ${token}`
+        }
+      })
+    if(photoResponse.ok){
+      const blob = await photoResponse.blob()
+      const url = await URL.createObjectURL(blob)
+      setImageUrl(url)
+
+    }
     setData(data.data)
   }
 
@@ -54,7 +66,7 @@ export default function page() {
       >
         <div className="flex flex-col gap-0.5">
           {width > 1200 && <MenuSection />}
-          <ProfileSection Username={data ? data.username : "loading..."} Role={data ? data.role : "loading..."} />
+          <ProfileSection Username={data ? data.username : "loading..."} Role={data ? data.role : "loading..."} media={imageUrl ? imageUrl : "https://i.pinimg.com/736x/bf/cb/e0/bfcbe08c8971f63b7d62bab4bb121786.jpg"} />
           <AbsenceSection />
           {width <= 1200 && <MenuSection />}
           <AnnouncementSection />

@@ -15,6 +15,7 @@ type DataProfile = {
   phone: number;
   address: string;
   role: string;
+  photoProfile: File | Buffer | string
   birth_date: string;
   departement: string;
 
@@ -22,15 +23,15 @@ type DataProfile = {
 
 export default function Page() {
   const [profile, setProfile] = useState<DataProfile | null>(null)
-
+  const [imageUrl, setImageUrl] = useState<string | null>(null)
   useEffect(() => {
     const getUserProfile = async () => {
       const token = localStorage.getItem('token')
-      if(!token){
+      const id = localStorage.getItem('id')
+      if(!token || !id){
         window.location.href = "/auth/login"
       }
     
-      const id = localStorage.getItem('id')
       const response = await fetch(`http://localhost:3001/dashboard/${id}`, {
         method: 'GET',
         headers: {
@@ -40,9 +41,24 @@ export default function Page() {
       
       const data = await response.json()
       setProfile(data.data)
+
+      const photoResponse = await fetch(`http://localhost:3001/users-accounts/${id}/photo`,{
+        headers : {
+          Authorization : `Bearer ${token}`
+        }
+      })
+
+      if(photoResponse.ok){
+        const blob = await photoResponse.blob();
+        console.log(blob)
+        setImageUrl(URL.createObjectURL(blob))
+      }
     }
 
+
     getUserProfile()
+    console.log(imageUrl)
+    console.log(profile)
   }, [])
 
   if(profile === null){
@@ -62,7 +78,7 @@ export default function Page() {
         <div className='flex justify-center mb-6'>
           <img
             className='rounded-full border-4 border-cyan-300'
-            src='https://i.pinimg.com/736x/bf/cb/e0/bfcbe08c8971f63b7d62bab4bb121786.jpg'
+            src={imageUrl ?? 'https://i.pinimg.com/736x/bf/cb/e0/bfcbe08c8971f63b7d62bab4bb121786.jpg'}
             alt='profile'
             width={200}
           />

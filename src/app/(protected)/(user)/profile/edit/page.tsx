@@ -18,7 +18,7 @@ type DataProfile = {
   role: string;
   birth_date: string;
   departement: string;
-  image: string;
+  image: string | File;
 }
 
 
@@ -33,13 +33,13 @@ const initialState : DataProfile= {
     password: '',
     phone: '',
     role: '',
-    departement: ''
+    departement: '',
 }
 
 type ActionType = 
 {type:"username", payload: string}|
 {type:"fullname",payload: string}|
-{type:"image", payload:string}|
+{type:"image", payload:string | File}|
 {type:"birth_date", payload:string}|
 {type:"gender",payload:string}|
 {type:"address",payload:string}|
@@ -71,6 +71,7 @@ export default function Page() {
   const [profile, setProfile] = useState<DataProfile | null>(null)
   const idref = useRef<HTMLInputElement>(null)
   const [state, dispatch] = useReducer(reducer,initialState)
+  
   useEffect(() => {
     const getUserProfile = async () => {
       const token = localStorage.getItem('token')
@@ -113,21 +114,49 @@ export default function Page() {
         idref.current.click();
     }
   }
+
   const changeProfile = (e : ChangeEvent<HTMLInputElement>)=>{
-    const file = e.target.files?.[0];
-    if(file){
-        const reader = new FileReader();
-        reader.onloadend = ()=>{
-            if(typeof reader.result === 'string'){
-                dispatch({type:"image",payload:reader.result})
-            }
-        }
-        reader.readAsDataURL(file)
+    const media = e.target.files?.[0];
+    if(media){
+      dispatch({type:"image", payload: media})
     }
   }
   const handleChange = (field: keyof DataProfile, value: string) => {
     dispatch({ type: field as any, payload: value })
 }
+
+  const profileUpdate = async()=>{
+    const user_id = localStorage.getItem("id")
+   if (!user_id) {
+    alert("User ID tidak ditemukan. Silakan login ulang.")
+    return
+  }    
+  
+    const formData = new FormData();
+    formData.append("fullname",state.fullname)
+    formData.append("gender",state.gender)
+    formData.append("phone",state.phone)
+    formData.append("address",state.address)
+    formData.append("birth_date",state.birth_date) 
+    formData.append("username",state.username)
+    if(state.image instanceof File){
+      formData.append("photoProfile",state.image)   
+    }
+    formData.append("email",profile.email)
+    formData.append("role",profile.role)
+    formData.append("password",profile.password)
+    formData.append("departement",profile.departement)
+    const response = await fetch(`http://localhost:3001/users-accounts/${user_id}`,{
+      method : "PATCH",
+      body : formData,
+    })
+    console.log(user_id)
+    const data = await response.json()
+    console.log(data)
+    if(data){
+      window.location.href = "/profile"
+    }
+  }
   return (
     <>
     <div className='min-h-screen'>
@@ -145,7 +174,7 @@ export default function Page() {
           <img
             onClick={openBrowser}
             className='rounded-full border-4 border-cyan-300'
-            src={state.image ? state.image :'https://i.pinimg.com/736x/bf/cb/e0/bfcbe08c8971f63b7d62bab4bb121786.jpg'}
+            src={state.image instanceof File? URL.createObjectURL(state.image) :'https://i.pinimg.com/736x/bf/cb/e0/bfcbe08c8971f63b7d62bab4bb121786.jpg'}
             alt='profile'
             width={200}
           />
@@ -157,7 +186,7 @@ export default function Page() {
             <div className='p-2 mx-4 flex flex-col gap-2'>
             <p><strong>Username:</strong>  <input type="text" onChange={(e)=>handleChange("username",e.target.value)} value={state.username? state.username : ""} className='border p-1 rounded-md' /></p>
             <p><strong>Fullname:</strong> <input type="text" onChange={(e)=>handleChange("fullname",e.target.value)} value={state.fullname? state.fullname : ""} className='border p-1 rounded-md' /></p>
-            <p className='flex gap-1'><strong>Email:</strong> {state.email? state.email : ""} <p className="text-red-600 text-sm"> *email tidak bisa diubah!</p></p>
+            <span><p className='flex gap-1'><strong>Email:</strong> {state.email? state.email : ""}</p> <p className="text-red-600 text-sm"> *email tidak bisa diubah!</p></span>
             <p><strong>Address:</strong> <input onChange={(e)=>handleChange("address",e.target.value)} type="text" value={state.address? state.address : ""} className='border p-1 rounded-md'/></p>
             <p><strong>Birth:</strong> <input onChange={(e)=>handleChange("birth_date",e.target.value)} type="date" value={state.birth_date? state.birth_date : ""} className='border p-1 rounded-md'/></p>
             <p><strong>Phone:</strong> <input onChange={(e)=>handleChange("phone",e.target.value)} type="text" value={state.phone? state.phone: ""} className='border p-1 rounded-md'/></p>
@@ -209,7 +238,7 @@ export default function Page() {
   
         <div className='flex  gap-5  justify-end'>
           <button onClick={()=> window.location.href ="/profile"} className='bg-red-400 p-3 w-52 shadow-2xl rounded-md'>Cancel</button>
-          <button className='bg-green-400 p-3 w-52 shadow-2xl rounded-md'>Simpan</button>
+          <button className='bg-green-400 p-3 w-52 shadow-2xl rounded-md' onClick={profileUpdate}>Simpan</button>
         </div>
       </div>
     </div>

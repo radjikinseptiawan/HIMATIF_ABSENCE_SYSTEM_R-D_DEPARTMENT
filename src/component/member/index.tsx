@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function MemberList({nama,jabatan}: {nama:string, jabatan:string}) {
+export default function MemberList({nama,jabatan,media}: {media:string,nama:string, jabatan:string}) {
     return (
         <div className='bg-white w-xl rounded shadow-2xl mx-auto p-4'>
             <div className='flex text-cyan-500 gap-8'>
-                <img src="https://i.pinimg.com/1200x/8c/10/0a/8c100a3d4910da272dadc05885dc35c2.jpg" width={80} alt="" />
+                <img src={media} width={80} alt="" />
                 <div>
                 <div>
                     <h1 className='font-bold text-xl'>{nama}</h1>

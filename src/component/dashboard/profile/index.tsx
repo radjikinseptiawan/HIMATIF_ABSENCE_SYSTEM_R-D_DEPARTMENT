@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 
-export default function ProfileSection({ Username, Role }: { Username: string | null, Role: string | null }) {
+export default function ProfileSection({ Username, Role,media }: { media:string,Username: string | null, Role: string | null }) {
   return (
     <div className="bg-white shadow-2xl rounded text-center w-full md:w-xl p-4 md:p-8 md:h-xl text-cyan-500 mx-auto">
       <div className="font-bold underline text-start mb-3">Profile</div>
       <img 
-        src="https://i.pinimg.com/736x/bf/cb/e0/bfcbe08c8971f63b7d62bab4bb121786.jpg" 
+        src={media} 
         alt="" 
         className="w-28 md:w-40 border-2 border-cyan-400 rounded-full mx-auto mb-3"
       />
