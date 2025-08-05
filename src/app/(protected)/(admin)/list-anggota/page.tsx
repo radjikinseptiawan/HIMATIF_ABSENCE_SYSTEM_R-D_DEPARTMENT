@@ -77,12 +77,13 @@ export default function Page() {
               key={item.user_id}
               nama={item.fullname}
               jabatan={item.role}
-              media={item.photo || "https://i.pinimg.com/1200x/36/51/f4/3651f43d5bcfea454a15a6589921305a.jpg"}
+              media={item.photo || "https://i.pinimg.com/736x/1a/a8/d7/1aa8d75f3498784bcd2617b3e3d1e0c4.jpg"}
             />
           )) :
           [...Array(11)].map((_, i) => <MemberLoading key={i} />)
         }
       </div>
+    <MenuNavigation/>
     </>
   )
 }

@@ -174,7 +174,7 @@ export default function Page() {
           <img
             onClick={openBrowser}
             className='rounded-full border-4 border-cyan-300'
-            src={state.image instanceof File? URL.createObjectURL(state.image) :'https://i.pinimg.com/736x/bf/cb/e0/bfcbe08c8971f63b7d62bab4bb121786.jpg'}
+            src={state.image instanceof File? URL.createObjectURL(state.image) : 'https://i.pinimg.com/736x/1a/a8/d7/1aa8d75f3498784bcd2617b3e3d1e0c4.jpg'}
             alt='profile'
             width={200}
           />

@@ -107,7 +107,7 @@ export default function Page() {
     if(!request.ok){
       console.log('error')
     }
-
+    window.location.href = "/program_kerja"
     return `Success add data`
    }catch(error){
     console.log(error)

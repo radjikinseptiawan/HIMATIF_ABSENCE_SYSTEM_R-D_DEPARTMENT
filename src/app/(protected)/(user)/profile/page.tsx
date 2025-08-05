@@ -78,7 +78,7 @@ export default function Page() {
         <div className='flex justify-center mb-6'>
           <img
             className='rounded-full border-4 border-cyan-300'
-            src={imageUrl ?? 'https://i.pinimg.com/736x/bf/cb/e0/bfcbe08c8971f63b7d62bab4bb121786.jpg'}
+            src={imageUrl ?? 'https://i.pinimg.com/736x/1a/a8/d7/1aa8d75f3498784bcd2617b3e3d1e0c4.jpg'}
             alt='profile'
             width={200}
           />
@@ -98,11 +98,11 @@ export default function Page() {
             </div>
 
             <h1 className='text-xl border-b-2 w-52'><strong>Organization</strong></h1>
-            <div className='p-2 mx-4 m'>
+            <div className='p-2 mx-4 overflow-auto overflow-x-scroll'>
             <p><strong>Department:</strong> {profile.departement}</p>
             <p><strong>Role:</strong> {profile.role}</p>
             <p><strong>Program Kerja :</strong></p>
-            <table className='text-center mx-auto my-4 rounded-md'>
+            <table className='text-center mx-auto my-4  rounded-md'>
               <thead className=''>
                 <tr>             
                 <th className='p-2 border font-bold text-white border-cyan-700 bg-cyan-400'>Nama Program</th>

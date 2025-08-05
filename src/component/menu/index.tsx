@@ -65,7 +65,6 @@ export default function MenuNavigation() {
             {[
               { title: "Home", href: "/dashboard", onClicked: toHome, icon : "/home.svg" },
               { title: "Profile", href: "/profile", onClicked: toProfile, icon:"/user.svg" },
-              { title: "Photos", href: "/photos", onClicked: photos, icon:"/camera.svg" },
               { title: "Program Kerja",href:"/program_kerja",onClicked: ()=>{console.log('progress')},icon:"/briefcase.svg"},
               { title: "Logout", href: "/auth/login", onClicked: logoutUser,icon:"/log-out.svg"},
             ].map((item, index) => (
@@ -81,7 +80,8 @@ export default function MenuNavigation() {
               (profile?.role == "Ketua Departement" || 
               profile?.role == "Ketua Umum" || 
               profile?.role == "Sekertaris Umum" || 
-              profile?.role == "Bendahara Umum") &&
+              profile?.role == "Bendahara Umum" ||
+              profile?.role == "Sekertaris Departement") &&
               <div className='p-3 border-t-2 border-cyan-400 '>
              {
               [

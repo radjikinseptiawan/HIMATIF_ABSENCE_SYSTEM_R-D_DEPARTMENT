@@ -66,7 +66,7 @@ export default function page() {
       >
         <div className="flex flex-col gap-0.5">
           {width > 1200 && <MenuSection />}
-          <ProfileSection Username={data ? data.username : "loading..."} Role={data ? data.role : "loading..."} media={imageUrl ? imageUrl : "https://i.pinimg.com/736x/bf/cb/e0/bfcbe08c8971f63b7d62bab4bb121786.jpg"} />
+          <ProfileSection Username={data ? data.username : "loading..."} Role={data ? data.role : "loading..."} media={imageUrl ? imageUrl : "https://i.pinimg.com/736x/1a/a8/d7/1aa8d75f3498784bcd2617b3e3d1e0c4.jpg"} />
           <AbsenceSection />
           {width <= 1200 && <MenuSection />}
           <AnnouncementSection />

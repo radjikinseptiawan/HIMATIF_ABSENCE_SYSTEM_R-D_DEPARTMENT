@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ProgramCard({programKerja,ketuplak,sekertaris1,link,Sekertaris2,bendahara1,bendahara2,status} : {link:string,status:string,programKerja:string, ketuplak:string, sekertaris1:string, Sekertaris2:string, bendahara1:string,bendahara2:string}) {
+export default function ProgramCard({programKerja,ketuplak,sekertaris1,link,Sekertaris2,bendahara1,bendahara2,status} : {link:()=>void,status:string,programKerja:string, ketuplak:string, sekertaris1:string, Sekertaris2:string, bendahara1:string,bendahara2:string}) {
   return (
     <div className='bg-white rounded-md shadow-2xl text-cyan-600 p-5 w-sm md:w-md lg:w-lg xl:w-xl mx-auto my-2'>
         <span className='flex justify-between border-b-2'>
@@ -34,11 +34,10 @@ export default function ProgramCard({programKerja,ketuplak,sekertaris1,link,Seke
             </div>
             
             <div className='text-center'>
-              <button className='flex flex-col text-center align-middle justify-center'>
+              <button onClick={link} className='flex flex-col text-center align-middle justify-center'>
               <img src="file-text.svg" alt="" width={30} className='mx-auto'/>
-              <a href={link}>
                 <p>Unduh Notulensi</p>
-              </a></button>
+              </button>
             </div>
         </span>
     </div>
