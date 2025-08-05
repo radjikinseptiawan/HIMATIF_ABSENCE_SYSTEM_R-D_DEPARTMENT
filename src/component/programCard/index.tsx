@@ -34,7 +34,11 @@ export default function ProgramCard({programKerja,ketuplak,sekertaris1,link,Seke
             </div>
             
             <div className='text-center'>
-              <button><a href={link}><h2>Unduh Notulensi</h2></a></button>
+              <button className='flex flex-col text-center align-middle justify-center'>
+              <img src="file-text.svg" alt="" width={30} className='mx-auto'/>
+              <a href={link}>
+                <p>Unduh Notulensi</p>
+              </a></button>
             </div>
         </span>
     </div>

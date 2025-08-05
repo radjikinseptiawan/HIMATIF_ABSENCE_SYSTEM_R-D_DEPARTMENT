@@ -198,10 +198,6 @@ export default function Page() {
           <div className='flex justify-center my-8'>
             <button onClick={submitToServer} className='bg-cyan-400 text-white p-2 font-bold rounded-md'>Buat Proker</button>
           </div>
-
-          <button onClick={()=>{
-            console.log(state)
-            }}>debug</button>
         </div>
       </div>
       <MenuNavigation/>
