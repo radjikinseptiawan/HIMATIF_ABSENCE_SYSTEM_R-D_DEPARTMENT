@@ -16,7 +16,7 @@ export default function UploadNotulensi() {
     if(announcement) formData.append("file", announcement)
    
       try{
-      const request = await fetch('http://localhost:3001/notulensi-upload',{
+      const request = await fetch('https://himatifabsencesystemr-ddepartmentbackend-production.up.railway.app/notulensi-upload',{
         method:"POST",
         body: formData
       })

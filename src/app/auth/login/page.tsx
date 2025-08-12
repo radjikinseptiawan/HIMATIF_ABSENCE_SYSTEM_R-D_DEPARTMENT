@@ -40,7 +40,7 @@ export default function Page() {
 
     const trySignIn = async (e : React.FormEvent)=>{
         e.preventDefault()
-        const response = await fetch('http://localhost:3001/login',{
+        const response = await fetch('https://himatifabsencesystemr-ddepartmentbackend-production.up.railway.app/login',{
             method : "POST",
             body:JSON.stringify({
                 email : state.email,

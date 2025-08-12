@@ -80,7 +80,7 @@ export default function Page() {
       }
     
       const id = localStorage.getItem('id')
-      const response = await fetch(`http://localhost:3001/dashboard/${id}`, {
+      const response = await fetch(`https://himatifabsencesystemr-ddepartmentbackend-production.up.railway.app/dashboard/${id}`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -146,7 +146,7 @@ export default function Page() {
     formData.append("role",profile.role)
     formData.append("password",profile.password)
     formData.append("departement",profile.departement)
-    const response = await fetch(`http://localhost:3001/users-accounts/${user_id}`,{
+    const response = await fetch(`https://himatifabsencesystemr-ddepartmentbackend-production.up.railway.app/users-accounts/${user_id}`,{
       method : "PATCH",
       body : formData,
     })

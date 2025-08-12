@@ -14,7 +14,7 @@ export default function MenuNavigation() {
       }
     
       const id = localStorage.getItem('id')
-      const response = await fetch(`http://localhost:3001/dashboard/${id}`, {
+      const response = await fetch(`https://himatifabsencesystemr-ddepartmentbackend-production.up.railway.app/dashboard/${id}`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,

@@ -47,7 +47,7 @@ export default function CreateMeeting() {
   const [state,dispatch] = useReducer(reducer,initialState);
 
   const submitForm = async()=>{
-    const response = await fetch("http://localhost:3001/rapat",{
+    const response = await fetch("https://himatifabsencesystemr-ddepartmentbackend-production.up.railway.app/rapat",{
       method:"POST",
       headers:{
         "Content-Type" : "application/json"

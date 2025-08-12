@@ -76,7 +76,7 @@ const submitForm = async()=>{
         console.log("failed send data")
     }
     try{
-            const response = await fetch('http://localhost:3001/users-accounts',{
+            const response = await fetch('https://himatifabsencesystemr-ddepartmentbackend-production.up.railway.app/users-accounts',{
         method:"POST",
         headers:{
             "Content-Type":"application/json"

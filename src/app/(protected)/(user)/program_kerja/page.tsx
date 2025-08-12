@@ -23,7 +23,7 @@ type ProkerType = {
 export default function page() {
   const [data,setData] = useState<ProkerType[]>([])
   const getData = async()=>{
-  const response = await fetch('http://localhost:3001/programkerja',{method:"GET"})
+  const response = await fetch('https://himatifabsencesystemr-ddepartmentbackend-production.up.railway.app/programkerja',{method:"GET"})
   const data = await response.json();
   const settings = data.data
   setData(settings)
@@ -33,7 +33,7 @@ export default function page() {
     getData()
   },[])
   const downloadNotulensi = async(id:number, judul:string)=>{
-    const response = await fetch(`http://localhost:3001/notulensi-upload/download/${id}`,{
+    const response = await fetch(`https://himatifabsencesystemr-ddepartmentbackend-production.up.railway.app/notulensi-upload/download/${id}`,{
       method:"GET"
     })
 

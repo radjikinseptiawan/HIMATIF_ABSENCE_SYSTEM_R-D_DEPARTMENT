@@ -19,7 +19,7 @@ export default function Page() {
   const getData = async () => {
     const token = localStorage.getItem("token")
 
-    const response = await fetch('http://localhost:3001/users-accounts', {
+    const response = await fetch('https://himatifabsencesystemr-ddepartmentbackend-production.up.railway.app/users-accounts', {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${token}`,
@@ -38,7 +38,7 @@ export default function Page() {
     const usersWithPhoto = await Promise.all(
       datas.data.map(async (user: UserData) => {
         try {
-          const photoRes = await fetch(`http://localhost:3001/users-accounts/${user.user_id}/photo`, {
+          const photoRes = await fetch(`https://himatifabsencesystemr-ddepartmentbackend-production.up.railway.app/${user.user_id}/photo`, {
             method: "GET",
             headers: {
               "Authorization": `Bearer ${token}`

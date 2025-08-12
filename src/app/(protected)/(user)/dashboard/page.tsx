@@ -34,7 +34,7 @@ export default function page() {
   const fetchingUser = async () => {
     const id = localStorage.getItem("id");
     const token = localStorage.getItem('token')
-    const response = await fetch(`http://localhost:3001/dashboard/${id}`, {
+    const response = await fetch(`https://himatifabsencesystemr-ddepartmentbackend-production.up.railway.app/dashboard/${id}`, {
       method: "GET",
       headers: { "Authorization": `Bearer ${token}` }
     })
@@ -44,7 +44,7 @@ export default function page() {
       console.log(response.status)
       throw new Error("Failed connecting to server")
     }
-          const photoResponse = await fetch(`http://localhost:3001/users-accounts/${id}/photo`,{
+          const photoResponse = await fetch(`https://himatifabsencesystemr-ddepartmentbackend-production.up.railway.app/users-accounts/${id}/photo`,{
         headers : {
           Authorization : `Bearer ${token}`
         }

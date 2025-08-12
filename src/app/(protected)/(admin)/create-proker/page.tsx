@@ -69,7 +69,7 @@ export default function Page() {
   const [state,dispatch] = useReducer(reducer,initialState)
   useEffect(()=>{
     const fetchingData = async()=>{
-      const response = await fetch('http://localhost:3001/anggota')
+      const response = await fetch('https://himatifabsencesystemr-ddepartmentbackend-production.up.railway.app/anggota')
       const data = await response.json()
       setData(data.data)
     }
