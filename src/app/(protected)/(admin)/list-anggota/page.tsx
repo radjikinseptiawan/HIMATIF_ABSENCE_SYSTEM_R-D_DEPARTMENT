@@ -19,7 +19,7 @@ export default function Page() {
   const getData = async () => {
     const token = localStorage.getItem("token")
 
-    const response = await fetch('https://himatifabsencesystemr-ddepartmentbackend-production.up.railway.app//users-accounts', {
+    const response = await fetch('https://himatifabsencesystemr-ddepartmentbackend-production.up.railway.app/users-accounts', {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${token}`,
