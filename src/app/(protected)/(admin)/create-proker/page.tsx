@@ -99,7 +99,7 @@ export default function Page() {
       formData.append('notulensi_rapat',state.notulensi_rapat)
     }
     try{
-    const request = await fetch('http://localhost:3001/programkerja',{
+    const request = await fetch("https://himatifabsencesystemr-ddepartmentbackend-production.up.railway.app/programkerja",{
       method:"POST",
       body:formData,
     })
