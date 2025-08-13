@@ -1,7 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 "use client"
 import MainNavigation from "@/component/mainNavigation";
-import MenuNavigation from "@/component/menu";
-import Image from "next/image";
 
 export default function Home() {
 

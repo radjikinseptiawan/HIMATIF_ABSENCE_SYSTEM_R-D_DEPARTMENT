@@ -1,6 +1,6 @@
 "use client"
 import MenuNavigation from "@/component/menu";
-import React, { useReducer, useState } from "react";
+import React, { useReducer } from "react";
 import './locals.css'
 
 type initialType = {

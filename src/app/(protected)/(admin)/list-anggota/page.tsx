@@ -72,7 +72,7 @@ export default function Page() {
       <MenuNavigation />
       <div className='flex gap-2 flex-col'>
         {loading ?
-          data.map((item, index) => (
+          data.map((item) => (
             <MemberList
               key={item.user_id}
               nama={item.fullname}
